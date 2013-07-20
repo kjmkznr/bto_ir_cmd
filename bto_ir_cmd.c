@@ -146,7 +146,7 @@ void write_device(struct libusb_device_handle *devh, unsigned char *cmd, int len
     buf[i] = cmd[i];
   }
   
-  r = libusb_bulk_transfer(devh, BTO_EP_OUT, buf, sizeof(buf) ,&size, 1000);
+  r = libusb_interrupt_transfer(devh, BTO_EP_OUT, buf, sizeof(buf) ,&size, 1000);
   if (r < 0) {
     fprintf(stderr, "libusb_interrupt_transfer (%d): %s\n", r, strerror(errno));
     exit(1);
@@ -157,7 +157,7 @@ int read_device(struct libusb_device_handle *devh, unsigned char *buf, int bufsi
   int size = 0;
   memset(buf, 0x00, bufsize);
 
-  int r = libusb_bulk_transfer(devh, BTO_EP_IN, buf, bufsize, &size, 1000);
+  int r = libusb_interrupt_transfer(devh, BTO_EP_IN, buf, bufsize, &size, 1000);
   if (r < 0) {
     fprintf(stderr, "libusb_interrupt_transfer (%d): %s\n", r, strerror(errno));
     exit(1);
