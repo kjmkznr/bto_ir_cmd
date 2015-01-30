@@ -2,7 +2,7 @@ CC      = cc
 OBJS    = bto_ir_cmd.o
 
 bto_ir_cmd: $(OBJS)
-	$(CC) -Wall -lusb-1.0 -o $@ $(OBJS)
+	$(CC) -Wall -o $@ $(OBJS) -lusb-1.0 
 
 .c.o:
 	$(CC) -c $<
